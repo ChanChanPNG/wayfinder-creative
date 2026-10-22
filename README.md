@@ -1,37 +1,15 @@
-# Wayfinder Creative — Website v1
+# Wayfinder Creative — Draft 2
 
-A responsive static site for GitHub + Vercel, with ten pages. No build process needed.
+Static multipage website for GitHub + Vercel. Nine destination pages: Home, Video Advertising, Website Design, Waypoint Systems, The Proof, About, Contact, Wedding Films, Real Estate Media. The older `/services/` and `/videoportfolio/` paths contain compatibility redirects.
 
-## Deploy
-1. Extract this ZIP.
-2. Upload the contents of the `wayfinder-site` folder to the root of your GitHub repository.
-3. Import the repository in Vercel as an **Other** framework, with no build command and the repository root as output.
-4. Point `wayfindercreative.net` at the Vercel project in its domain settings.
+## Deployment
+Upload the **contents** of the `wayfinder-site` folder to the root of your GitHub repository. Connect that repository to Vercel using Other/static framework, build command empty, output directory `.`. Configure domain after preview review.
 
-## Pages
-- `/` — Home
-- `/services/` — Services overview
-- `/services/web-design/` — Website design
-- `/waypoint-systems/` — Waypoint Systems CRM
-- `/videoportfolio/` — Video portfolio
-- `/about/` — About
-- `/theproof/` — The Proof
-- `/contact/` — General contact
-- `/films/weddings/` — Wedding films
-- `/media/real-estate/` — Real estate media
+## Media placeholders
+`assets/wayfinder-creative-logo.png` and `assets/waypoint-systems-logo.png` are the original supplied logo files. The hero currently shows an abstract SVG fallback. When ready, add your optimized muted MP4/WebM footage to `assets/media/` and add `<source src="/assets/media/hero.webm" type="video/webm">` and/or MP4 to the `<video class="hero-background-video">` in `assets/site.js`. Media on other pages remains labeled as placeholder.
 
-## Editing
-- `assets/styles.css` — colors, fonts, typography, layout, animations
-- `assets/site.js` — navigation/footer, all page content, GHL form configuration, social links
-- `assets/media/` — add your future assets here and replace placeholder blocks in the templates
+## GHL forms
+Set the public HTTPS LeadConnector iframe URLs in `CONFIG.forms` near the top of `assets/site.js` for `general`, `web`, `wedding`, and `realestate`. No live submission occurs until configured. Configure your compliant notice/consent inside GHL and publish relevant legal pages before collecting data or marketing opt-ins.
 
-## Important before launch
-- GHL forms are **not connected**; each contact section shows a working email/phone fallback and a labelled form placeholder. Set the form URLs in `CONFIG.forms` in `assets/site.js` to the published GHL iframe URLs. Distinct forms are configured for `general`, `web`, `wedding`, and `realestate`. The CRM page uses `general` until you choose otherwise.
-- Consent / privacy-policy text is not invented or asserted as compliant. Publish a real privacy policy and configure each GHL form's appropriate consent fields before collecting leads or sending SMS.
-- Portfolio examples are project references only; media, exact metrics, testimonials and client logos need verified assets and permission before publishing.
-- `assets/media/` is intentionally empty. The hero video/media placeholders are **not** live videos.
-- No public pricing. No residential street address.
-- Stripe is not connected yet. This site intentionally collects inquiries rather than taking payments.
-
-## Brand
-Pine #172C26, Forest #314B40, Sage #8A9D89, Stone #DCD9CE, Ivory #F6F4ED. Typeface loading uses Google Fonts (Space Grotesk + Inter) with system fallbacks.
+## Notes
+Public pricing and private residential street address have deliberately been excluded. No analytics or performance statistics were fabricated. Footer joke reflects user-provided wording. This version is not connected to live forms, Stripe payments, or media assets yet.

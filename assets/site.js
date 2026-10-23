@@ -13,7 +13,53 @@ function youtubeCarousel(key){const c=YOUTUBE_PLAYLISTS[key];return `<div class=
 function videoGalleries(keys){return keys.map(youtubeCarousel).join('')}
 function renderVideoCard(item,shape){const id=encodeURIComponent(item.id),title=esc(item.title||'Untitled video');return `<button type="button" class="yt-video-card ${shape==='vertical'?'portrait':'landscape'}" data-video-id="${id}" aria-label="Play ${title}"><span class="yt-thumbnail"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" loading="lazy" alt=""/><span class="yt-play" aria-hidden="true">▶</span></span><span class="yt-video-title">${title}</span></button>`}
 async function loadGallery(gallery){const key=gallery.dataset.playlist,conf=YOUTUBE_PLAYLISTS[key],track=gallery.querySelector('.yt-gallery-track');try{const response=await fetch('/api/playlist?category='+encodeURIComponent(key),{headers:{'Accept':'application/json'}});const data=await response.json();if(!response.ok)throw Error(data.error||'Videos are temporarily unavailable');if(!Array.isArray(data.items)||!data.items.length){track.innerHTML='<p class="yt-status">No public videos in this playlist yet. Check back soon.</p>';return}track.innerHTML=data.items.map(v=>renderVideoCard(v,conf.shape)).join('')}catch(err){track.innerHTML=`<div class="yt-error"><p>Videos aren’t loading here yet. ${esc(err.message||'The YouTube connection needs attention.')}</p><a href="https://www.youtube.com/playlist?list=${encodeURIComponent(conf.id)}" target="_blank" rel="noopener noreferrer">Try the playlist on YouTube ↗</a></div>`}}
-function initGalleries(){document.querySelectorAll('.youtube-gallery').forEach(gallery=>{loadGallery(gallery);gallery.querySelector('.yt-prev').addEventListener('click',()=>gallery.querySelector('.yt-gallery-track').scrollBy({left:-Math.round(gallery.clientWidth*.7),behavior:'smooth'}));gallery.querySelector('.yt-next').addEventListener('click',()=>gallery.querySelector('.yt-gallery-track').scrollBy({left:Math.round(gallery.clientWidth*.7),behavior:'smooth'}))});document.addEventListener('click',event=>{const card=event.target.closest('.yt-video-card');if(!card)return;const id=card.dataset.videoId;const modal=document.createElement('dialog');modal.className='yt-dialog';modal.innerHTML=`<div class="yt-dialog-head"><span>NOW PLAYING / WAYFINDER CREATIVE</span><button type="button" class="yt-dialog-close" aria-label="Close video">✕</button></div><div class="yt-dialog-frame"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;document.body.appendChild(modal);modal.addEventListener('close',()=>modal.remove(),{once:true});modal.querySelector('.yt-dialog-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});modal.showModal()})}
+function initGalleries(){
+  document.querySelectorAll('.youtube-gallery').forEach(gallery=>{
+    loadGallery(gallery);
+    gallery.querySelector('.yt-prev').addEventListener('click',()=>gallery.querySelector('.yt-gallery-track').scrollBy({left:-Math.round(gallery.clientWidth*.7),behavior:'smooth'}));
+    gallery.querySelector('.yt-next').addEventListener('click',()=>gallery.querySelector('.yt-gallery-track').scrollBy({left:Math.round(gallery.clientWidth*.7),behavior:'smooth'}));
+  });
+  document.addEventListener('click',event=>{
+    const card=event.target.closest('.yt-video-card');
+    if(!card)return;
+    // Navigate the cards in the gallery that was clicked, not an unrelated playlist.
+    const gallery=card.closest('.youtube-gallery');
+    if(!gallery)return;
+    const cards=Array.from(gallery.querySelectorAll('.yt-video-card'));
+    let currentIndex=cards.indexOf(card);
+    if(currentIndex<0)return;
+    const modal=document.createElement('dialog');
+    modal.className='yt-dialog';
+    modal.innerHTML=`<div class="yt-dialog-head"><span>NOW PLAYING / ${esc(YOUTUBE_PLAYLISTS[gallery.dataset.playlist]?.label||'WAYFINDER CREATIVE')}</span><button type="button" class="yt-dialog-close" aria-label="Close video">✕</button></div><div class="yt-dialog-player"><button class="yt-dialog-nav yt-dialog-prev" type="button" aria-label="Previous video">❮</button><div class="yt-dialog-frame"><iframe title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="yt-dialog-nav yt-dialog-next" type="button" aria-label="Next video">❯</button></div><div class="yt-dialog-footer"><span class="yt-dialog-title"></span><span class="yt-dialog-count" aria-live="polite"></span></div>`;
+    document.body.appendChild(modal);
+    const player=modal.querySelector('iframe');
+    const updateVideo=()=>{
+      const selected=cards[currentIndex];
+      const id=selected.dataset.videoId;
+      // Replacing src stops the previous video before starting the next.
+      player.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+      modal.querySelector('.yt-dialog-title').textContent=selected.querySelector('.yt-video-title')?.textContent||'Video';
+      modal.querySelector('.yt-dialog-count').textContent=`${currentIndex+1} / ${cards.length}`;
+      const multi=cards.length>1;
+      modal.querySelectorAll('.yt-dialog-nav').forEach(button=>{button.hidden=!multi});
+    };
+    const move=direction=>{
+      currentIndex=(currentIndex+direction+cards.length)%cards.length;
+      updateVideo();
+    };
+    modal.querySelector('.yt-dialog-prev').addEventListener('click',()=>move(-1));
+    modal.querySelector('.yt-dialog-next').addEventListener('click',()=>move(1));
+    modal.querySelector('.yt-dialog-close').addEventListener('click',()=>modal.close());
+    modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});
+    modal.addEventListener('keydown',e=>{
+      if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}
+      if(e.key==='ArrowRight'){e.preventDefault();move(1)}
+    });
+    modal.addEventListener('close',()=>{player.src='about:blank';modal.remove()},{once:true});
+    modal.showModal();
+    updateVideo();
+  });
+}
 
 const placeholder=(title,kind='Photo / video to be added')=>`<div class="media-placeholder" role="img" aria-label="Placeholder for upcoming ${esc(kind.toLowerCase())}"><div><strong>${esc(title)}</strong><span>${esc(kind)} · Coming soon</span></div></div>`;
 const cta=(title='We could write another clever headline. Or we could get to work.',desc='Tell us what you need. We’ll figure out whether we can help.',to='/contact/')=>`<section class="cta"><div class="wrap"><div class="eyebrow" style="color:#b6cab8">YOUR MOVE / NEXT STEPS</div><h2>${title}</h2><p>${desc}</p><div class="buttonrow">${btn('Let’s Talk',to,true)}</div><div class="spacer"></div><span class="tiny">No 47-slide sales presentation required.</span></div></section>`;

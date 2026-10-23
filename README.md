@@ -27,3 +27,8 @@ Five galleries use these playlist IDs exactly as supplied: Business Promos `PLeg
 5. Test `/api/playlist?category=business` on the deployed preview; expected response has `items` with video IDs and titles. If you get a 502, check the full playlist ID and public visibility.
 
 After initial setup, change only the YouTube playlist membership when publishing new videos; Vercel caches gallery responses for about 15 minutes. Videos play in YouTube privacy-enhanced embeds when a thumbnail is clicked. If YouTube is unreachable or setup is missing, the site shows a friendly message and a direct playlist link (not fake videos). Local file previews don't execute Vercel functions.
+
+
+## Draft 4: Video popup navigation
+
+Each video popup now includes previous/next arrows that move through the selected YouTube playlist without leaving the popup. Navigation wraps from the last video to the first. Left/right keyboard arrows also work while the dialog has keyboard focus, and Escape closes it. The gallery feed, API endpoint, and environment variable remain unchanged.

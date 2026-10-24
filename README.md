@@ -32,3 +32,10 @@ After initial setup, change only the YouTube playlist membership when publishing
 ## Draft 4: Video popup navigation
 
 Each video popup now includes previous/next arrows that move through the selected YouTube playlist without leaving the popup. Navigation wraps from the last video to the first. Left/right keyboard arrows also work while the dialog has keyboard focus, and Escape closes it. The gallery feed, API endpoint, and environment variable remain unchanged.
+
+
+## Draft 3 update (October 2026)
+
+Added `/blog/` with five placeholder article cards, moved Blog into the Other navigation dropdown, revised homepage video showcase and copy, standardized YouTube gallery displays and removed visible external playlist links, updated Proof/About/Web Design/Real Estate content, and replaced the Waypoint header image with the compass artwork extracted from the supplied planning workbook.
+
+Note: The uploaded build does not include a hero-video file; the existing hero poster remains the fallback. The GHL form URLs are also unconfigured, unchanged from the supplied build.

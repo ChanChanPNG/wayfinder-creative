@@ -39,3 +39,17 @@ Each video popup now includes previous/next arrows that move through the selecte
 Added `/blog/` with five placeholder article cards, moved Blog into the Other navigation dropdown, revised homepage video showcase and copy, standardized YouTube gallery displays and removed visible external playlist links, updated Proof/About/Web Design/Real Estate content, and replaced the Waypoint header image with the compass artwork extracted from the supplied planning workbook.
 
 Note: The uploaded build does not include a hero-video file; the existing hero poster remains the fallback. The GHL form URLs are also unconfigured, unchanged from the supplied build.
+
+
+## Legal & Compliance addition (October 28, 2026)
+
+The shared `footer()` in `assets/site.js` now includes four footer links, available on all site pages:
+
+- `/privacy-policy/` — Privacy Policy
+- `/terms-of-service/` — Terms of Service
+- `/sms-policy/` — SMS & Opt-In Policy
+- `/anti-spam/` — Anti-Spam Compliance
+
+Each path has its own `index.html`, a dedicated content route in `assets/site.js`, and canonical metadata. The legal pages reuse the existing header, brand, footer and responsive design.
+
+**Required before launch / messaging:** Verify drafted policies against actual deployed collection/tracking tools and business processes. `CONFIG.forms` currently contains empty values; this package does not implement live GHL form consent, cookie consent, SMS opt-in or automated STOP/HELP handling. Before activating SMS, configure applicable separate unchecked opt-in checkboxes, disclosures, consent records, A2P registration, and STOP/HELP automations in GHL and test them. Review consent requirements for analytics/ads tracking and deploy an appropriate consent mechanism where required. Confirm the legal entity name if different from the Wayfinder Creative trade name. Confirm an actual qualifying physical postal address for the footer of any commercial marketing email; none was provided for public publication. Have counsel review the policy text for legal suitability.

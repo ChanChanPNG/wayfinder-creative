@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="850" viewBox="0 0 1000 850"><g fill="none" stroke="#314b40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<!-- camera body -->
+<g transform="translate(70 65) rotate(-12 70 45)"><path d="M10 22h28l10-15h43l9 15h32q10 0 10 10v60H0V32q0-10 10-10Z"/><circle cx="76" cy="57" r="29"/><circle cx="76" cy="57" r="20"/><path d="M13 12h20v10M115 35h12"/><circle cx="76" cy="57" r="7" stroke="#ff653a"/></g>
+<!-- drone -->
+<g transform="translate(660 65) rotate(10 90 60)"><rect x="62" y="30" width="55" height="46" rx="12"/><path d="m65 35-42-20m90 20 42-20M65 70 23 95m90-25 42 25M81 76v18h18V76"/><ellipse cx="20" cy="12" rx="32" ry="8"/><ellipse cx="160" cy="12" rx="32" ry="8"/><ellipse cx="20" cy="98" rx="32" ry="8"/><ellipse cx="160" cy="98" rx="32" ry="8"/><circle cx="90" cy="53" r="7" stroke="#ff653a"/></g>
+<!-- light on stand -->
+<g transform="translate(410 235) rotate(-8 40 90)"><rect x="0" y="0" width="75" height="55" rx="4"/><path d="m0 5-18-12v65L0 48m75-43 18-12v65L75 48M10 0 5-14h65L65 0M37 55v92m0-25-32 50m32-50 32 50m-32-25v25"/><path d="M17 18h40M17 29h40M17 40h40"/></g>
+<!-- shotgun microphone -->
+<g transform="translate(100 350) rotate(-28 60 30)"><rect x="0" y="0" width="125" height="30" rx="14"/><path d="M18 5v20M28 5v20M38 5v20M48 5v20M58 5v20M68 5v20M78 5v20M88 5v20m-38 5v17h27V30m-14 17v32m-18 0h36"/></g>
+<!-- gimbal -->
+<g transform="translate(785 340) rotate(12 45 65)"><rect x="16" y="0" width="68" height="43" rx="6"/><circle cx="50" cy="21" r="13"/><path d="M3 20H0v50h104V20H88M52 70v25h30v22H52"/><rect x="40" y="110" width="24" height="70" rx="8"/></g>
+<!-- tripod -->
+<g transform="translate(560 570)"><rect x="22" y="0" width="42" height="18" rx="3"/><path d="M43 18v30M26 48h34M43 48 5 180m38-132 42 132M43 48v132M32 87h23M12 157h62m-31-8v16M64 8l30-14"/></g>
+<!-- lens -->
+<g transform="translate(220 645) rotate(-18 50 45)"><ellipse cx="50" cy="9" rx="44" ry="13"/><path d="M6 9v80m88-80v80"/><ellipse cx="50" cy="89" rx="44" ry="13"/><path d="M6 29q44 25 88 0M6 39q44 25 88 0M6 65q44 25 88 0"/><path d="M18 22v15m10-11v15m10-12v15m10-12v15m10-12v15m10-13v15m10-17v15"/></g>
+<!-- SD card -->
+<g transform="translate(875 690) rotate(18 30 40)"><path d="M0 0h43l17 18v66H0Z"/><path d="M10 0v22h29V0M16 0v16m8-16v16m8-16v16"/><rect x="10" y="37" width="40" height="29" rx="3"/><path d="M17 48h26m-26 8h18" stroke="#ff653a"/></g>
+<!-- utility tool -->
+<g transform="translate(340 90) rotate(30 15 50)"><path d="M10 42 0 20 6 0h8v25h14V0h8l6 20-10 22v57a11 11 0 0 1-22 0Z"/><circle cx="21" cy="97" r="4"/></g>
+</g></svg>

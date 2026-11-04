@@ -2,27 +2,16 @@
 (() => {
   const root = document.documentElement;
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
-  let enabled = sessionStorage.getItem('wayfinder-motion') !== 'off' && !preference.matches;
+  let enabled = !preference.matches;
   const progress = document.createElement('div');
   progress.className = 'motion-progress';
   progress.setAttribute('aria-hidden', 'true');
-  const control = document.createElement('button');
-  control.className = 'motion-lab';
-  control.type = 'button';
-  document.body.append(progress, control);
+  document.body.append(progress);
   const sync = () => {
     root.classList.toggle('motion-on', enabled);
-    control.setAttribute('aria-pressed', String(enabled));
-    control.setAttribute('aria-label', enabled ? 'Pause experimental motion' : 'Enable experimental motion');
-    control.innerHTML = `Motion lab <span>${enabled ? 'ON · pause' : 'OFF · play'}</span>`;
     schedule();
   };
-  control.addEventListener('click', () => {
-    enabled = !enabled;
-    sessionStorage.setItem('wayfinder-motion', enabled ? 'on' : 'off');
-    sync();
-  });
-  preference.addEventListener('change', () => { enabled = !preference.matches && sessionStorage.getItem('wayfinder-motion') !== 'off'; sync(); });
+  preference.addEventListener('change', () => { enabled = !preference.matches; sync(); });
 
   // Preserve the existing heading markup and natural spaces for selection and reading.
   document.querySelectorAll('main h1, main h2').forEach(heading => {

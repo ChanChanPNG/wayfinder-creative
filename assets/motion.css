@@ -53,3 +53,32 @@ html{scroll-padding-top:110px}body{overflow-x:clip}
 @media(max-width:650px){.motion-on .motion-reveal{transform:translateY(28px)}.motion-on .motion-tilt{rotate:none}.motion-on :is(.hero-content,.page-hero>.wrap){translate:none;opacity:1}}
 html:not(.motion-on) .motion-word>span{transform:none;opacity:1}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.motion-on .motion-reveal{opacity:1;transform:none;filter:none}.motion-on .motion-heading .motion-word>span{opacity:1;transform:none}.motion-on :is(.hero-media,.hero-content,.page-hero>.wrap){transform:none;translate:none;opacity:1}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+
+.definition-word {
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .definition-title {
+    animation: definition-title-glow 1200ms ease-out;
+  }
+
+  .definition-letter {
+    animation: definition-letter-glow 240ms ease-in-out;
+    animation-delay: calc(1200ms + var(--letter-index) * 30ms);
+  }
+}
+
+@keyframes definition-title-glow {
+  0%, 83.333% {
+    color: var(--orange);
+    text-shadow: 0 0 12px var(--orange);
+  }
+}
+
+@keyframes definition-letter-glow {
+  50% {
+    color: var(--orange);
+    text-shadow: 0 0 10px var(--orange);
+  }
+}

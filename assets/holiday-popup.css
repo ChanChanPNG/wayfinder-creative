@@ -1,0 +1,39 @@
+.holiday-popup{box-sizing:border-box;width:min(620px,calc(100% - 32px));max-height:86vh;max-height:86dvh;padding:0;border:3px solid #ff5b2e;border-radius:16px;background:#fff;color:#18251e;overflow:auto;box-shadow:0 24px 90px #0008}.holiday-popup::backdrop{background:rgb(4 14 10 / 76%)}.holiday-copy{padding:32px 32px 4px}.holiday-copy h2{font-size:clamp(25px,4vw,34px);line-height:1.12;letter-spacing:-.035em;margin:12px 0 14px;padding-right:12px}.holiday-copy h2 span{color:#c33d16;white-space:nowrap}.holiday-copy p{color:#33443a;font-size:15px;line-height:1.3;margin:0 0 15px}.holiday-copy .holiday-eyebrow{font-size:10px;font-weight:800;letter-spacing:.12em;color:#a33313;margin:0}.holiday-copy .holiday-subheading{font-size:17px;font-weight:650;line-height:1.25;margin-bottom:22px}.holiday-close{position:sticky;top:10px;float:right;margin:10px 10px -46px 0;z-index:2;width:32px;height:32px;padding:0;display:grid;place-items:center;background:#14261d;color:#fff;border:0;border-radius:50%;font-size:26px;line-height:1;cursor:pointer}.holiday-launch{position:fixed;bottom:22px;right:22px;z-index:90;background:#ff5b2e;color:#111e16;border:2px solid #fff;border-radius:30px;padding:12px 20px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 6px 24px #0004}.holiday-close:focus-visible,.holiday-launch:focus-visible{outline:3px solid #6a50ac;outline-offset:3px}body:has(.holiday-popup[open]){overflow:hidden}@media(max-width:480px){.holiday-copy{padding:28px 20px 0}.holiday-launch{bottom:14px;right:14px}.holiday-popup{max-height:90dvh}}
+/* Dialog motion also applies when reopened from the offer button. */
+.holiday-popup[open]{animation:holiday-enter 480ms cubic-bezier(.16,1,.3,1) both}
+.holiday-popup[open]::backdrop{animation:holiday-backdrop-in 360ms ease-out both}
+.holiday-popup[open].is-closing{animation:holiday-exit 220ms ease-in both;pointer-events:none}
+.holiday-popup[open].is-closing::backdrop{animation:holiday-backdrop-out 220ms ease-in both}
+@keyframes holiday-enter{from{opacity:0;transform:translateY(32px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes holiday-exit{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(18px) scale(.98)}}
+@keyframes holiday-backdrop-in{from{opacity:0}to{opacity:1}}
+@keyframes holiday-backdrop-out{from{opacity:1}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.holiday-popup[open],.holiday-popup[open]::backdrop{animation:none}}
+
+.holiday-button-arrow{position:absolute;bottom:calc(100% + 22px);right:44px;width:112px;height:62px;transform-origin:70% 50%;overflow:visible;pointer-events:none;color:#ff5b2e;filter:drop-shadow(0 2px 4px #0006);animation:holiday-arrow-point 1.6s ease-in-out infinite}
+.holiday-button-arrow path{fill:currentColor;stroke:none}
+body:has(.holiday-popup[open]) .holiday-button-arrow{visibility:hidden;animation-play-state:paused}
+@keyframes holiday-arrow-point{0%,100%{transform:translate(-3px,-5px) rotate(48deg)}50%{transform:translate(3px,3px) rotate(48deg)}}
+@media(max-width:480px){.holiday-button-arrow{width:86px;height:48px;right:40px}}
+@media(prefers-reduced-motion:reduce){.holiday-button-arrow{animation:none;transform:rotate(48deg)}}
+
+.holiday-price{position:relative;display:inline-block}
+.holiday-price-arrow{position:absolute;width:78px;height:43px;right:-35px;top:-52px;fill:#ff5b2e;pointer-events:none;transform:rotate(130deg);animation:holiday-price-point 1.6s ease-in-out infinite;filter:drop-shadow(0 2px 3px #0002)}
+@keyframes holiday-price-point{0%,100%{transform:translate(3px,-3px) rotate(130deg)}50%{transform:translate(-2px,2px) rotate(130deg)}}
+@media(max-width:480px){.holiday-price-arrow{width:58px;height:32px;right:-20px;top:-35px}}
+@media(prefers-reduced-motion:reduce){.holiday-price-arrow{animation:none}}
+
+/* Keep the offer readable and the price arrow clear of text on phones. */
+@media(max-width:600px){
+  .holiday-popup{width:calc(100% - 20px);max-width:calc(100% - 20px);max-height:90vh;max-height:90dvh;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .holiday-copy{padding:34px 18px 0}
+  .holiday-copy h2{font-size:24px;line-height:1.12;padding-right:0;margin-top:14px}
+  .holiday-copy .holiday-eyebrow{font-size:9px;letter-spacing:.07em;padding-right:24px;line-height:1.3}
+  .holiday-copy .holiday-subheading{font-size:15px;margin-bottom:18px}
+  .holiday-copy p{font-size:14px}
+  .holiday-copy h2 .holiday-price{display:block;width:max-content;margin-top:5px}
+  .holiday-price-arrow{width:58px;height:32px;right:-72px;top:0;transform:rotate(180deg);animation:holiday-price-point-mobile 1.6s ease-in-out infinite}
+  .holiday-close{top:8px;margin-right:8px;width:30px;height:30px}
+}
+@keyframes holiday-price-point-mobile{0%,100%{transform:translateX(3px) rotate(180deg)}50%{transform:translateX(-3px) rotate(180deg)}}
+@media(prefers-reduced-motion:reduce){.holiday-price-arrow{animation:none}}
